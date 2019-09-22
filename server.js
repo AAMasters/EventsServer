@@ -104,7 +104,7 @@ ipc.serve(
                                 message: global.DEFAULT_OK_RESPONSE.message,
                                 eventSubscriptionId: eventSubscriptionId
                             }
-                            sendResponse(global.DEFAULT_OK_RESPONSE)
+                            sendResponse(response)
                             return
                         }
                         case "stopListening": {
