@@ -233,7 +233,7 @@ function newEventHandler() {
     }
 
     function raiseEvent(eventType, event) {
-        for (var i = 0; i < thisObject.listeners.length; i++) {
+        for (let i = 0; i < thisObject.listeners.length; i++) {
             /* We will execute all the functions listening to this event type. */
 
             if (thisObject.listeners[i][1] === eventType) {
