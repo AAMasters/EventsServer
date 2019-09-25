@@ -24,7 +24,7 @@ ipc.serve(
         ipc.server.on(
             'message',
             function (data, socket) {
-                ipc.log('[INFO] Got a new message : '.debug, data);
+                ipc.log('Events Server [INFO] Got a new message : '.debug, data);
 
                 try {
                     let command = JSON.parse(data)
@@ -124,7 +124,7 @@ ipc.serve(
                             We check here if there are no more listeners and the event handler original emmiter is also gone, then we need to delete
                             this event handlers since chances are that is not needed anymore.
                             */
-                            if (eventHandler.listeners.length === 0 && deleteWhenAllListenersAreGone === true) {
+                            if (eventHandler.listeners.length === 0 && eventHandler.deleteWhenAllListenersAreGone === true) {
                                 eventHandlers.delete(command.eventHandlerName)
                             }
 
@@ -163,8 +163,8 @@ ipc.serve(
                     }
 
                 } catch (err) {
-                    console.log("[ERROR] Bad Command Received:" + data)
-                    console.log("[ERROR] An Error Happened:" + err.stack)
+                    console.log("Events Server [ERROR] Bad Command Received:" + data)
+                    console.log("Events Server [ERROR] An Error Happened:" + err.stack)
                     sendResponse(global.DEFAULT_FAIL_RESPONSE)
                 }   
             }
@@ -172,13 +172,13 @@ ipc.serve(
         ipc.server.on(
             'connect',
             function (socket) {
-                ipc.log('[INFO] client has connected!');
+                ipc.log('Events Server [INFO] client has connected!');
             }
         );
         ipc.server.on(
             'socket.disconnected',
             function (socket) {
-                ipc.log('[INFO] client has disconnected!');
+                ipc.log('Events Server [INFO] client has disconnected!');
             }
         );
     }
