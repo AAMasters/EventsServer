@@ -24,7 +24,7 @@ ipc.serve(
         ipc.server.on(
             'message',
             function (data, socket) {
-                ipc.log('Events Server [INFO] Got a new message : '.debug, data);
+                ipc.log('[INFO] Events Server -> Got a new message : '.debug, data);
 
                 try {
                     let command = JSON.parse(data)
@@ -104,6 +104,7 @@ ipc.serve(
                                 message: global.DEFAULT_OK_RESPONSE.message,
                                 eventSubscriptionId: eventSubscriptionId
                             }
+ 
                             sendResponse(response)
                             return
                         }
@@ -112,7 +113,7 @@ ipc.serve(
 
                             if (eventHandler === undefined) {
                                 if (ipc.config.silent !== true) {
-                                    console.log("[WARN] Cannot to stop listening to events at an Event Handler that does not exist.")
+                                    console.log("[WARN] Events Server -> Cannot to stop listening to events at an Event Handler that does not exist.")
                                 }
                                 sendResponse(global.DEFAULT_FAIL_RESPONSE)
                                 return
@@ -136,7 +137,7 @@ ipc.serve(
 
                             if (eventHandler === undefined) {
                                 if (ipc.config.silent !== true) {
-                                    console.log("[WARN] Cannot to raise events at an Event Handler that does not exist.")
+                                    console.log("[WARN] Events Server -> Cannot to raise events at an Event Handler that does not exist.")
                                 }
                                 sendResponse(global.DEFAULT_FAIL_RESPONSE)
                                 return
@@ -148,7 +149,7 @@ ipc.serve(
                         }
                     }
 
-                    console.log("[WARN] Unknown Command Received:" + data)
+                    console.log("[WARN] Events Server -> Unknown Command Received:" + data)
 
                     function sendResponse(message) {
                         if (command.callerId) {
@@ -163,22 +164,23 @@ ipc.serve(
                     }
 
                 } catch (err) {
-                    console.log("Events Server [ERROR] Bad Command Received:" + data)
-                    console.log("Events Server [ERROR] An Error Happened:" + err.stack)
+                    console.log("[ERROR] Events Server -> Bad Command Received:" + data)
+                    console.log("[ERROR] Events Server -> An Error Happened:" + err.stack)
                     sendResponse(global.DEFAULT_FAIL_RESPONSE)
                 }   
+
             }
         );
         ipc.server.on(
             'connect',
             function (socket) {
-                ipc.log('Events Server [INFO] client has connected!');
+                ipc.log('[INFO] Events Server -> client has connected!');
             }
         );
         ipc.server.on(
             'socket.disconnected',
             function (socket) {
-                ipc.log('Events Server [INFO] client has disconnected!');
+                ipc.log('[INFO] Events Server -> client has disconnected!');
             }
         );
     }
