@@ -142,7 +142,7 @@ ipc.serve(
                                 sendResponse(global.DEFAULT_FAIL_RESPONSE)
                                 return
                             }
-
+                            //console.log("[INFO] Events Server -> Raising Event " + command.eventHandlerName + " " + command.eventType)
                             eventHandler.raiseEvent(command.eventType, command.event)
                             sendResponse(global.DEFAULT_OK_RESPONSE)
                             return
