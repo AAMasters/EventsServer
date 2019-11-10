@@ -112,9 +112,9 @@ ipc.serve(
                             let eventHandler = eventHandlers.get(command.eventHandlerName)
 
                             if (eventHandler === undefined) {
-                                if (ipc.config.silent !== true) {
-                                    console.log("[WARN] Events Server -> Cannot to stop listening to events at an Event Handler that does not exist.")
-                                }
+                                //if (ipc.config.silent !== true) {
+                                    console.log("[WARN] Events Server -> Cannot to stop listening to events at an Event Handler that does not exist. Command = "+ JSON.stringify(command))
+                                //}
                                 sendResponse(global.DEFAULT_FAIL_RESPONSE)
                                 return
                             }
@@ -136,9 +136,9 @@ ipc.serve(
                             let eventHandler = eventHandlers.get(command.eventHandlerName)
 
                             if (eventHandler === undefined) {
-                                if (ipc.config.silent !== true) {
-                                    console.log("[WARN] Events Server -> Cannot to raise events at an Event Handler that does not exist.")
-                                }
+                                //if (ipc.config.silent !== true) {
+                                console.log("[WARN] Events Server -> Cannot raise events at an Event Handler that does not exist. Command = " + JSON.stringify(command))
+                                //}
                                 sendResponse(global.DEFAULT_FAIL_RESPONSE)
                                 return
                             }
